@@ -1,28 +1,29 @@
-#|
-(require "popup-dododo")
-(popup-dododo :ド (point) :timeout 3 :color '(255 0 0))
-(popup-dododo :ドッギャァーン :mouse :size 300 :timeout 3 :color '(255 0 0))
-(popup-dododo :ゴ33 (point) :x-repeat 3 :timeout 4)
-(add-popup-dododo-on-command 'kill-line :ズキュウウウン :color '(0 0 255) :size 200)
-(add-popup-dododo-on-command-char #\RET :メメタァ :color '(255 0 0))
-(add-popup-dododo-on-command 'other-window :フワリ… :color '(255 0 0))
-(add-popup-dododo-on-command 'split-window :スォォォ :color '(255 0 0))
-(add-popup-dododo-on-command 'delete-other-windows :ガッシン :color '(255 0 0))
-|#
-
 (load-library "Gates")
 (setq *status-bar-format* "cuT")
 (setq *keyword-load-path* '("E:/Program Files/xyzzy/keyword/"))
-(pushnew '(".xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
 
+; popup
 (require "dabbrev")
 (global-set-key #\C-\; 'dabbrev-popup)
 (setq *popup-completion-list-default* :always)
 (setq *minibuffer-popup-completion-list* :never)
 
+; lisp-mode
+(pushnew '(".xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
+
+; buffer
+(setq *next-buffer-in-tab-order* t)
+(global-set-key #\M-Down 'next-buffer)
+(global-set-key #\M-Up 'previous-buffer)
+
+; window
+(global-set-key #\M-PageUp 'move-previous-window)
+(global-set-key #\M-PageDown 'other-window)
+
+; agile
 (defun auto-reload-firefox-toggle ()
   (interactive)
   (message "Auto Reload Firefox ~A."
@@ -35,40 +36,42 @@
 		 (shell-execute "E:/src/xrea/diary/2010/minify.vbs" t))))
 (global-set-key #\C-F5 'auto-reload-firefox-toggle)
 
+; indent
 (defun indent-current-buffer ()
   (interactive)
   (indent-region (point-min) (point-max))
   (message "indent buffer"))
 (global-set-key #\C-F8 'indent-current-buffer)
 
+; datetime
 (defun insert-my-date-string ()
   (interactive)
   (insert (format-date-string "%Y-%m-%dT%H:%M:%S%#Z")))
 (global-set-key #\C-F9 'insert-my-date-string)
 
-;; バッファをさくさく切り替えたい
-(setq *next-buffer-in-tab-order* t) ; バッファ移動をタブ順に
-(global-set-key #\M-Down 'next-buffer) ; 後のバッファに移動 
-(global-set-key #\M-Up 'previous-buffer) ; 前のバッファに移動 
-
-;; ウィンドウもさくさく切り替えたい
-(global-set-key #\M-PageUp 'move-previous-window)
-(global-set-key #\M-PageDown 'other-window)
-
+; net-installer
 (require "ni/setup")
 (ni-autoload)
 ; (setq ni::*http-proxy-host* "proxy.host")
 ; (setq ni::*http-proxy-port* 8080)
 
+; bat
+(export 'ed::winbatch-mode "ed")
+(autoload 'winbatch-mode "winbatch-mode" t)
+(pushnew '("\\.bat$" . winbatch-mode) *auto-mode-alist* :test 'equal)
+
+; as
 (export 'ed::actionscript-mode "ed")
 (autoload 'actionscript-mode "actionscript-mode" t)
 (pushnew '("\\.asc?$" . actionscript-mode) *auto-mode-alist* :test 'equal)
 (setq ed::*actionscript-mode-autosave-as-utf8* t)
 
+; css
 (export 'ed::css+-mode "ed")
 (autoload 'css+-mode "css+-mode" t)
 (pushnew '("\\.css$" . css+-mode) *auto-mode-alist* :test 'equal)
 
+; html
 (export 'ed::html+-mode "ed")
 (autoload 'html+-mode "html+-mode" t)
 (pushnew '("\\.hta?$" . html+-mode) *auto-mode-alist* :test 'equal)
@@ -76,10 +79,12 @@
 (pushnew '("\\.php?$" . html+-mode) *auto-mode-alist* :test 'equal)
 (pushnew '("\\.xhtml?$" . html+-mode) *auto-mode-alist* :test 'equal)
 
+; ini
 (export 'ed::ini-mode "ed")
 (autoload 'ini-mode "ini-mode" t)
 (pushnew '("\\.ini$" . ini-mode) *auto-mode-alist* :test 'equal)
 
+; javascript
 (require "javascript-mode")
 (export 'ed::javascript-mode "ed")
 (autoload 'javascript-mode "javascript-mode" t)
@@ -99,19 +104,16 @@
         (dabbrev-expand)
       (funcall mode-specific-indent-command)))
 
+; php
 (load-library "php-mode")
-; (pushnew '("\\.php$" . php-mode) *auto-mode-alist*)
-; (load-library "php-misc")
-; (setq *php-html-help-path* "C:/xyzzy/etc/php_manual_ja.chm")
+(pushnew '("\\.php$" . php-mode) *auto-mode-alist*)
 
-(export 'ed::winbatch-mode "ed")
-(autoload 'winbatch-mode "winbatch-mode" t)
-(pushnew '("\\.bat$" . winbatch-mode) *auto-mode-alist* :test 'equal)
-
+; xml
 (require "xml/xslt")
 (pushnew '("\\.mxml$" . xml-mode) *auto-mode-alist* :test 'equal)
 (pushnew '("\\.xul$" . xml-mode) *auto-mode-alist* :test 'equal)
 
+; multi
 (load-library "multi-major-mode.l")
 (defun multi-html-mode ()
   (multi-mode t "html+-mode"
