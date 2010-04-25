@@ -1,13 +1,13 @@
 #|
 (require "popup-dododo")
-(popup-dododo :ƒh (point) :timeout 3 :color '(255 0 0))
-(popup-dododo :ƒhƒbƒMƒƒƒ@[ƒ“ :mouse :size 300 :timeout 3 :color '(255 0 0))
-(popup-dododo :ƒS33 (point) :x-repeat 3 :timeout 4)
-(add-popup-dododo-on-command 'kill-line :ƒYƒLƒ…ƒEƒEƒEƒ“ :color '(0 0 255) :size 200)
-(add-popup-dododo-on-command-char #\RET :ƒƒƒ^ƒ@ :color '(255 0 0))
-(add-popup-dododo-on-command 'other-window :ƒtƒƒŠc :color '(255 0 0))
-(add-popup-dododo-on-command 'split-window :ƒXƒHƒHƒH :color '(255 0 0))
-(add-popup-dododo-on-command 'delete-other-windows :ƒKƒbƒVƒ“ :color '(255 0 0))
+(popup-dododo :ãƒ‰ (point) :timeout 3 :color '(255 0 0))
+(popup-dododo :ãƒ‰ãƒƒã‚®ãƒ£ã‚¡ãƒ¼ãƒ³ :mouse :size 300 :timeout 3 :color '(255 0 0))
+(popup-dododo :ã‚´33 (point) :x-repeat 3 :timeout 4)
+(add-popup-dododo-on-command 'kill-line :ã‚ºã‚­ãƒ¥ã‚¦ã‚¦ã‚¦ãƒ³ :color '(0 0 255) :size 200)
+(add-popup-dododo-on-command-char #\RET :ãƒ¡ãƒ¡ã‚¿ã‚¡ :color '(255 0 0))
+(add-popup-dododo-on-command 'other-window :ãƒ•ãƒ¯ãƒªâ€¦ :color '(255 0 0))
+(add-popup-dododo-on-command 'split-window :ã‚¹ã‚©ã‚©ã‚© :color '(255 0 0))
+(add-popup-dododo-on-command 'delete-other-windows :ã‚¬ãƒƒã‚·ãƒ³ :color '(255 0 0))
 |#
 
 (load-library "Gates")
@@ -46,12 +46,12 @@
   (insert (format-date-string "%Y-%m-%dT%H:%M:%S%#Z")))
 (global-set-key #\C-F9 'insert-my-date-string)
 
-;; ƒoƒbƒtƒ@‚ğ‚³‚­‚³‚­Ø‚è‘Ö‚¦‚½‚¢
-(setq *next-buffer-in-tab-order* t) ; ƒoƒbƒtƒ@ˆÚ“®‚ğƒ^ƒu‡‚É
-(global-set-key #\M-Down 'next-buffer) ; Œã‚Ìƒoƒbƒtƒ@‚ÉˆÚ“® 
-(global-set-key #\M-Up 'previous-buffer) ; ‘O‚Ìƒoƒbƒtƒ@‚ÉˆÚ“® 
+;; ãƒãƒƒãƒ•ã‚¡ã‚’ã•ãã•ãåˆ‡ã‚Šæ›¿ãˆãŸã„
+(setq *next-buffer-in-tab-order* t) ; ãƒãƒƒãƒ•ã‚¡ç§»å‹•ã‚’ã‚¿ãƒ–é †ã«
+(global-set-key #\M-Down 'next-buffer) ; å¾Œã®ãƒãƒƒãƒ•ã‚¡ã«ç§»å‹• 
+(global-set-key #\M-Up 'previous-buffer) ; å‰ã®ãƒãƒƒãƒ•ã‚¡ã«ç§»å‹• 
 
-;; ƒEƒBƒ“ƒhƒE‚à‚³‚­‚³‚­Ø‚è‘Ö‚¦‚½‚¢
+;; ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚‚ã•ãã•ãåˆ‡ã‚Šæ›¿ãˆãŸã„
 (global-set-key #\M-PageUp 'move-previous-window)
 (global-set-key #\M-PageDown 'other-window)
 
