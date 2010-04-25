@@ -1,3 +1,4 @@
+; General
 (load-library "Gates")
 (setq *status-bar-format* "cuT")
 (setq *keyword-load-path* '("E:/Program Files/xyzzy/keyword/"))
