@@ -56,16 +56,24 @@
 ; (setq ni::*http-proxy-host* "proxy.host")
 ; (setq ni::*http-proxy-port* 8080)
 
-; bat
-(export 'ed::winbatch-mode "ed")
-(autoload 'winbatch-mode "winbatch-mode" t)
-(pushnew '("\\.bat$" . winbatch-mode) *auto-mode-alist* :test 'equal)
-
 ; as
 (export 'ed::actionscript-mode "ed")
 (autoload 'actionscript-mode "actionscript-mode" t)
 (pushnew '("\\.asc?$" . actionscript-mode) *auto-mode-alist* :test 'equal)
 (setq ed::*actionscript-mode-autosave-as-utf8* t)
+
+; bash
+(export 'ed::bash-mode "ed")
+(autoload 'bash-mode "bash-mode" t)
+(pushnew '("\\.sh$" . bash-mode) *auto-mode-alist* :test 'equal)
+
+; bat
+(export 'ed::winbatch-mode "ed")
+(autoload 'winbatch-mode "winbatch-mode" t)
+(pushnew '("\\.bat$" . winbatch-mode) *auto-mode-alist* :test 'equal)
+
+; c
+(pushnew '("\\.m$" . c-mode) *auto-mode-alist* :test 'equal)
 
 ; css
 (export 'ed::css+-mode "ed")
@@ -92,6 +100,9 @@
 (pushnew '("\\.htc$" . javascript-mode) *auto-mode-alist* :test 'equal)
 (pushnew '("\\.js$" . javascript-mode) *auto-mode-alist* :test 'equal)
 (pushnew '("\\.json$" . javascript-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("\\.mxml$" . javascript-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("\\.ng$" . javascript-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("\\.wsc$" . javascript-mode) *auto-mode-alist* :test 'equal)
 (pushnew '("\\.wsf$" . javascript-mode) *auto-mode-alist* :test 'equal)
 (let ((keymap (make-sparse-keymap)))
   (define-key keymap #\TAB 'my-dabbrev-expand)
@@ -111,7 +122,7 @@
 
 ; xml
 (require "xml/xslt")
-(pushnew '("\\.mxml$" . xml-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("\\.xaml$" . xml-mode) *auto-mode-alist* :test 'equal)
 (pushnew '("\\.xul$" . xml-mode) *auto-mode-alist* :test 'equal)
 
 ; multi
