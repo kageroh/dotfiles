@@ -68,6 +68,12 @@
 
 ; ================================================================
 
+; lisp
+(pushnew '(".xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
+
 ; as
 (export 'ed::actionscript-mode "ed")
 (autoload 'actionscript-mode "actionscript-mode" t)
@@ -127,12 +133,6 @@
     (if (string-matchp "[0-9A-Z#$%&+._-]" (string (preceding-char)))
         (dabbrev-expand)
       (funcall mode-specific-indent-command)))
-
-; lisp
-(pushnew '(".xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
 
 ; php
 (load-library "php-mode")
