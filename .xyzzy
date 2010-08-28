@@ -1,7 +1,13 @@
+; net-installer
+(require "ni/setup")
+(ni-autoload)
+; (setq ni::*http-proxy-host* "proxy.host")
+; (setq ni::*http-proxy-port* 8080)
+
 ; General
 (load-library "Gates")
 (setq *status-bar-format* "cuT")
-(setq *keyword-load-path* '("E:/Program Files/xyzzy/keyword/"))
+(setq *keyword-load-path* '("~/keyword/"))
 
 ; popup
 (require "dabbrev")
@@ -9,11 +15,19 @@
 (setq *popup-completion-list-default* :always)
 (setq *minibuffer-popup-completion-list* :never)
 
-; lisp-mode
-(pushnew '(".xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
+; session
+(defvar *default-session* "~/.default_session")
+(defun load-default-session ()
+  (unless (file-exist-p *default-session*)
+	(save-session *default-session*))
+  (load-session *default-session* t)
+  (toggle-session-auto-save t))
+(add-hook '*post-startup-hook* 'load-default-session)
+(defun save-default-session ()
+  (save-session *default-session* t))
+(add-hook '*kill-xyzzy-hook* 'save-default-session)
+
+; ================================================================
 
 ; buffer
 (setq *next-buffer-in-tab-order* t)
@@ -23,6 +37,8 @@
 ; window
 (global-set-key #\M-PageUp 'move-previous-window)
 (global-set-key #\M-PageDown 'other-window)
+
+; ================================================================
 
 ; agile
 (defun auto-reload-firefox-toggle ()
@@ -34,7 +50,7 @@
   (let ((file (get-buffer-file-name)))
 	(and file
 		 (member (pathname-type file) '("css" "html" "js" "xml") :test 'equalp)
-		 (shell-execute "E:/src/xrea/diary/2010/minify.vbs" t))))
+		 (shell-execute "~/reload_firefox.exe" t))))
 (global-set-key #\C-F5 'auto-reload-firefox-toggle)
 
 ; indent
@@ -50,11 +66,7 @@
   (insert (format-date-string "%Y-%m-%dT%H:%M:%S%#Z")))
 (global-set-key #\C-F9 'insert-my-date-string)
 
-; net-installer
-(require "ni/setup")
-(ni-autoload)
-; (setq ni::*http-proxy-host* "proxy.host")
-; (setq ni::*http-proxy-port* 8080)
+; ================================================================
 
 ; as
 (export 'ed::actionscript-mode "ed")
@@ -115,6 +127,12 @@
     (if (string-matchp "[0-9A-Z#$%&+._-]" (string (preceding-char)))
         (dabbrev-expand)
       (funcall mode-specific-indent-command)))
+
+; lisp
+(pushnew '(".xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
 
 ; php
 (load-library "php-mode")
