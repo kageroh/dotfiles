@@ -69,10 +69,10 @@
 ; ================================================================
 
 ; lisp
-(pushnew '(".xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("^.xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("^javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("^CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("^HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
 
 ; as
 (export 'ed::actionscript-mode "ed")
