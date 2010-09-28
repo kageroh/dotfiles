@@ -50,7 +50,7 @@
   (let ((file (get-buffer-file-name)))
 	(and file
 		 (member (pathname-type file) '("css" "html" "js" "xml") :test 'equalp)
-		 (shell-execute "~/reload_firefox.exe" t))))
+		 (shell-execute "C:/Program Files/xyzzy/reload_firefox.exe" t))))
 (global-set-key #\C-F5 'auto-reload-firefox-toggle)
 
 ; indent
