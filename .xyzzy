@@ -49,7 +49,7 @@
 (defun auto-reload-firefox ()
   (let ((file (get-buffer-file-name)))
 	(and file
-		 (member (pathname-type file) '("css" "html" "js" "xml") :test 'equalp)
+ (member (pathname-type file) '("css" "html" "js" "scss" "xml" "xsl") :test 'equalp)
 		 (shell-execute "~/reload_firefox.exe" t))))
 (global-set-key #\C-F5 'auto-reload-firefox-toggle)
 
@@ -69,10 +69,10 @@
 ; ================================================================
 
 ; lisp
-(pushnew '("^.xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("^javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("^CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
-(pushnew '("^HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("\\.xyzzy$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("javascript\\+DOM$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("CSS$" . lisp-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("HTML$" . lisp-mode) *auto-mode-alist* :test 'equal)
 
 ; as
 (export 'ed::actionscript-mode "ed")
@@ -97,6 +97,7 @@
 (export 'ed::css+-mode "ed")
 (autoload 'css+-mode "css+-mode" t)
 (pushnew '("\\.css$" . css+-mode) *auto-mode-alist* :test 'equal)
+(pushnew '("\\.scss$" . css+-mode) *auto-mode-alist* :test 'equal)
 
 ; html
 (export 'ed::html+-mode "ed")
