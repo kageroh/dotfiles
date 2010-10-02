@@ -2,7 +2,7 @@ alias ls='ls -G'
 alias ll='ls -l'
 alias la='ls -a'
 
-alias sass='sass --load-path ~/src/css/'
+alias sass='sass --load-path ~/src/sass/'
 
 PS1="\w $ "
 
