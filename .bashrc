@@ -6,6 +6,6 @@ alias sass='sass --load-path ~/src/sass/'
 
 PS1="\w $ "
 
-export PATH=/opt/local/bin:/opt/local/sbin/:$PATH
-export MANPATH=/opt/local/man:$MANPATH
-
+export NODE_PATH=~/.npm/libraries:$NODE_PATH
+export PATH=/opt/local/bin:/opt/local/sbin/:~/.npm/bin:$PATH
+export MANPATH=/opt/local/man:~/.npm/man:$MANPATH
