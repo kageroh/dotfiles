@@ -473,6 +473,7 @@ prompt
 
 ;**5
 clearInterval
+clearTimeout
 setInterval
 setTimeout
 
