@@ -49,8 +49,8 @@
 (defun auto-reload-firefox ()
   (let ((file (get-buffer-file-name)))
 	(and file
- (member (pathname-type file) '("css" "html" "js" "scss" "xml" "xsl") :test 'equalp)
-		 (shell-execute "~/reload_firefox.exe" t))))
+		 (member (pathname-type file) '("css" "html" "js" "scss" "xml" "xsl") :test 'equalp)
+		 (shell-execute (merge-pathnames "reload_firefox.exe" (user-homedir-pathname)) t))))
 (global-set-key #\C-F5 'auto-reload-firefox-toggle)
 
 ; indent
