@@ -1,11 +1,21 @@
-alias ls='ls -G'
-alias ll='ls -l'
-alias la='ls -a'
-
-alias sass='sass --load-path ~/src/sass/'
-
-PS1="\w $ "
+hh=$HOSTNAME
+uu=$USER
+col=32
+TITLEBAR='\[\033]0; \w\007\]'
+PS1="${TITLEBAR}
+\[\e[${col}m\]$uu@$hh \[\e[33m\]\w
+\[\e[${col}m\]\$\[\e[m\] "
 
 export NODE_PATH=~/.npm/libraries:$NODE_PATH
 export PATH=/opt/local/bin:/opt/local/sbin/:~/.npm/bin:$PATH
 export MANPATH=/opt/local/man:~/.npm/man:$MANPATH
+
+alias ls='ls -G'
+alias ll='ls -l'
+alias la='ls -a'
+alias lm='ls -altr'
+alias ps='ps aux'
+
+alias ..='cd ..'
+
+alias sass='sass --load-path ~/src/sass/'
