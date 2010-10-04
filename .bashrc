@@ -6,9 +6,9 @@ PS1="${TITLEBAR}
 \[\e[${col}m\]$uu@$hh \[\e[33m\]\w
 \[\e[${col}m\]\$\[\e[m\] "
 
-export NODE_PATH=~/.npm/libraries:$NODE_PATH
-export PATH=/opt/local/bin:/opt/local/sbin/:~/.npm/bin:$PATH
-export MANPATH=/opt/local/man:~/.npm/man:$MANPATH
+export PATH=/opt/local/bin:/opt/local/sbin/:$HOME/.npm/bin:$PATH
+export MANPATH=/opt/local/man:$HOME/.npm/man:$MANPATH
+export NODE_PATH=$HOME/.npm/libraries:$NODE_PATH
 
 alias ls='ls -G'
 alias ll='ls -l'
