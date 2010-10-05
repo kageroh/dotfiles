@@ -305,7 +305,7 @@ set iminsert=0 imsearch=0
 
 set nofoldenable
 set lazyredraw
-" inoremap <expr> <CR> pumvisible() ? "\<C-Y>\<CR>" : "\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>\<CR>" : "\<CR>"
 
 let g:AutoComplPop_CompleteOption = '.,w,b,k'
 let g:AutoComplPop_Behavior = {
