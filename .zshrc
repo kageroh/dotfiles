@@ -32,7 +32,7 @@ MANPATHS=(
 )
 export MANPATH=${(j.:.)MANPATHS}
 
-export NODE_PATH=~/.npm/libraries:$NODE_PATH
+export NODE_PATH=$HOME/.npm/libraries:$NODE_PATH
 
 unset PS1
 
