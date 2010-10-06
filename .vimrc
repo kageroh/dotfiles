@@ -331,6 +331,8 @@ let g:AutoComplPop_Behavior = {
       \   ]
       \ }
 
+autocmd BufNewFile,BufRead *.cgi set filetype=perl
+
 autocmd BufNewFile,BufRead *.io set filetype=io
 autocmd BufNewFile,BufRead *.scala set filetype=scala
 autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=git fenc=utf-8 | AutoComplPopDisable
