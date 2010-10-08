@@ -19,3 +19,4 @@ alias ps='ps aux'
 alias ..='cd ..'
 
 alias sass='sass --load-path $HOME/src/sass/'
+alias perl='perl5.10.0'
