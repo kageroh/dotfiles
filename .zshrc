@@ -165,7 +165,7 @@ alias ll='ls -l'
 alias la='ls -a'
 alias lm='ls -altrh'
 alias ps='ps aux'
-
+alias hi='history'
 alias ..='cd ..'
 
 alias sass='sass --load-path $HOME/src/sass/'
