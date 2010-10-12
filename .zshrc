@@ -211,7 +211,7 @@ abbreviations=(
 	"gitp"  "git"
 	"ush"   "push"
 
-	"mysql" "mysql -unobody -pnobody -h"
+	# "mysql" "mysql -unobody -pnobody -h"
 )
 
 magic-abbrev-expand () {
