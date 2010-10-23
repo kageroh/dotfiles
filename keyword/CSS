@@ -293,6 +293,7 @@ transform
 transform-origin
 visibility
 word-wrap
+z-index
 
 ;*2
 absolute
