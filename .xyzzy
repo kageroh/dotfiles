@@ -5,9 +5,22 @@
 ; (setq ni::*http-proxy-port* 8080)
 
 ; General
-(load-library "Gates")
+(load-library "winkey")
 (setq *status-bar-format* "cuT")
 (setq *keyword-load-path* '("~/keyword/"))
+
+; isearch
+(load-library "isearch")
+(load-library "isearch-deco")
+
+; migemo
+(require "migemo")
+(migemo-toggle t)
+(define-key *isearch-map* #\C-v 'isearch-paste-from-clipboard)
+
+; paren
+(require "paren")
+(turn-on-global-paren)
 
 ; popup
 (require "dabbrev")
