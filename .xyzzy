@@ -5,18 +5,19 @@
 ; (setq ni::*http-proxy-port* 8080)
 
 ; General
-(load-library "winkey")
+(load-library "Gates")
 (setq *status-bar-format* "cuT")
 (setq *keyword-load-path* '("~/keyword/"))
 
-; isearch
-(load-library "isearch")
-(load-library "isearch-deco")
-
-; migemo
+; search
 (require "migemo")
 (migemo-toggle t)
 (define-key *isearch-map* #\C-v 'isearch-paste-from-clipboard)
+(require "isearch-deco")
+(global-set-key #\C-k 'isearch-forward-deco)
+(require "pickup-pattern")
+(add-hook '*show-match-hook* 'pickup-pattern-last-search)
+(add-hook '*show-match-hook* 'ed::show-match)
 
 ; paren
 (require "paren")
@@ -170,3 +171,32 @@
 			  )
   )
 (add-hook 'ed::*html+-mode-hook* 'multi-html-mode)
+
+; ================================================================
+
+;; outline-tree2
+(defvar treeview::*treeview-click-focas* t)
+(defun outline-tree2::outline-tree-set-buffer-by-node (&optional node)
+ (treeview::with-app (outline-tree2::*outline-tree-app-id*)
+   (unless node
+     (setq node (outline-tree2::outline-tree-get-selected-node)))
+   (setq node (outline-tree2::outline-tree-get-buffer-node-by-node node))
+   (let ((window-list (mapcar 'car (caddr (current-window-configuration))))
+         (buffer (outline-tree2::outline-tree-get-buffer-by-node node))
+         (current-window (selected-window)))
+     (when (and (windowp outline-tree2::*outline-tree-target-window*)
+                (not (eq outline-tree2::*outline-tree-target-window* (selected-window)))
+                (not (minibuffer-window-p outline-tree2::*outline-tree-target-window*))
+                (member outline-tree2::*outline-tree-target-window* window-list))
+       (set-window outline-tree2::*outline-tree-target-window*))
+     (set-buffer buffer)
+     (set-window current-window))
+   (winapi:InvalidateRect (get-window-handle) 0 1)
+   (winapi:UpdateWindow (get-window-handle))
+	(and treeview::*treeview-click-focas*
+		 (case *this-command*
+		   ('outline-tree2::outline-tree-select-down-key-node nil)
+		   ('outline-tree2::outline-tree-select-up-key-node nil)
+		   (t (treeview::treeview-focus-editor))))
+   (refresh-title-bar)
+   (refresh-screen 1)))
