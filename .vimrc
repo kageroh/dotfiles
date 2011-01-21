@@ -1,5 +1,5 @@
 if has('gui_macvim')
-	colorscheme ir_black
+	colorscheme wombat
 	set antialias
 	set guifont=Menlo:h13
 	set guioptions-=T
@@ -24,7 +24,7 @@ augroup END
 syntax on
 
 if &term =~ "xterm-256color"
-	colorscheme desert256
+	colorscheme wombat
 	" omini..
 	highlight Pmenu ctermbg=8
 	highlight PmenuSel ctermbg=12
