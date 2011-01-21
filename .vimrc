@@ -6,7 +6,7 @@ if has('gui_macvim')
 	set lines=90 columns=200
 	set showtabline=2
 	set termencoding=japan
-	set transparency=3
+	set transparency=30
 endif
 
 call pathogen#runtime_append_all_bundles()
@@ -15,6 +15,11 @@ call pathogen#helptags()
 :let g:miniBufExplMapWindowNavVim = 1
 :let g:miniBufExplMapWindowNavArrows = 1
 :let g:miniBufExplMapCTabSwitchBuffs = 1
+
+augroup MyXML
+	autocmd!
+	autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
+augroup END
 
 syntax on
 
