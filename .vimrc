@@ -1,5 +1,20 @@
+if has('gui_macvim')
+	colorscheme darkblue
+	set antialias
+	set guifont=Menlo:h13
+	set guioptions-=T
+	set lines=90 columns=200
+	set showtabline=2
+	set termencoding=japan
+	set transparency=3
+endif
+
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+
+:let g:miniBufExplMapWindowNavVim = 1
+:let g:miniBufExplMapWindowNavArrows = 1
+:let g:miniBufExplMapCTabSwitchBuffs = 1
 
 syntax on
 
