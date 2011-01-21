@@ -1,3 +1,19 @@
+syntax on
+
+highlight ZenkakuSpace ctermbg=6
+match ZenkakuSpace /　/
+
+highlight Pmenu ctermbg=6 guibg=#4c745a
+highlight PmenuSel ctermbg=3 guibg=#d4b979
+highlight PmenuSbar ctermbg=0 guibg=#333333
+
+if &term =~ "xterm-256color"
+	colorscheme wombat
+	highlight Pmenu ctermbg=8
+	highlight PmenuSel ctermbg=12
+	highlight PmenuSbar ctermbg=0
+endif
+
 if has('gui_macvim')
 	colorscheme wombat
 	set antialias
@@ -9,99 +25,44 @@ if has('gui_macvim')
 	set transparency=30
 endif
 
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-
-:let g:miniBufExplMapWindowNavVim = 1
-:let g:miniBufExplMapWindowNavArrows = 1
-:let g:miniBufExplMapCTabSwitchBuffs = 1
-
-augroup MyXML
-	autocmd!
-	autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
-augroup END
-
-syntax on
-
-if &term =~ "xterm-256color"
-	colorscheme wombat
-	" omini..
-	highlight Pmenu ctermbg=8
-	highlight PmenuSel ctermbg=12
-	highlight PmenuSbar ctermbg=0
-endif
-
-highlight ZenkakuSpace ctermbg=6
-match ZenkakuSpace /\s\+$\|　/
-
-"ポップアップ補完メニュー色設定（通常の項目、選択されている項目、スクロールバー、スクロールバーのつまみ部分）
-highlight Pmenu ctermbg=6 guibg=#4c745a
-highlight PmenuSel ctermbg=3 guibg=#d4b979
-highlight PmenuSbar ctermbg=0 guibg=#333333
-"highlight PmenuThumb ctermbg=0 guibg=Red
-
-set listchars=tab:>.
-set list
-
-" ヤンクがクリップボードを使うようにする
-set clipboard=unnamed
-
-" zsh っぽい補完に
-"
-set wildmode=longest,list
-
-" ちゃんと文字書いて○とか
 set ambiwidth=double
-
-" ポップアップメニューをよしなに
-set completeopt=menu,preview,longest,menuone
-
-" 補完候補の設定
-set complete=.,w,b,u,k
-
-" バックアップとか自分でしろ
-set nobackup
-
-" 誰かが編集したら読み直して
-set autoread
-
-" 袖あまりは良いものだ
-set scrolloff=10000000
-" 行番号の表示
-set number
-" デフォルトインデント設定
 set autoindent smartindent
-" よさげなタブ
+set autoread
+set backspace=indent,eol,start
+set clipboard=unnamed
+set complete=.,w,b,u,k
+set completeopt=menu,preview,longest,menuone
+set encoding=utf-8
+set fileencodings=euc-jp,iso-2022-jp
+set hidden
+set ignorecase smartcase
+set iminsert=0 imsearch=0
+set incsearch
+set laststatus=2
+set lazyredraw
+set list
+set listchars=tab:>.
+set listchars+=precedes:<,extends:>
+set nobackup
+set nofoldenable
+set nowrap
+set nowrapscan
+set nrformats=hex,alpha
+set number
+set scrolloff=10000000
+set showcmd
+set showmatch
+set sidescroll=5
 set smarttab
 set softtabstop=4 tabstop=4 shiftwidth=4
-" BS の挙動
-set backspace=indent,eol,start
-
-" よしなにしてくれ
-set ignorecase smartcase
-" インクメンタル
-set incsearch
-" 最初にもどれ
-set wrapscan
-
-" 対応する括弧の表示
-set showmatch
-" 入力中のコマンドを表示
-set showcmd
-
-" 行頭・行末間移動を可能に
-set whichwrap=b,s,h,l,<,>,[,]
-
-" 補完候補を表示する
-set wildmenu
-
 set splitbelow
-
-set nrformats="hex"
-
-" ステータス表示用変数
-set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']['.&ft.']'}\ U+%4B\ %=%l,%c%V%8P
+set viminfo+=!
+set whichwrap=b,s,h,l,<,>,[,]
+set wildmenu
+set wildmode=longest,list
+
+let termencoding=&encoding
 
 function! CharacterCount()
 	redir @c
@@ -110,33 +71,20 @@ function! CharacterCount()
 	return matchstr(@c, '[0-9]* of [0-9]* Chars')
 endfunction
 
-set termencoding=utf-8
-set encoding=utf-8
-set fileencodings=euc-jp,iso-2022-jp
-
-set hidden
-
-set viminfo+=!
-
-set nowrap
-set sidescroll=5
-set listchars+=precedes:<,extends:>
-
-filetype plugin on
 filetype indent on
+filetype plugin on
+
+autocmd BufNewFile,BufRead *.cgi set filetype=perl
+autocmd BufNewFile,BufRead *.io set filetype=io
+autocmd BufNewFile,BufRead *.scala set filetype=scala
+autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=git fenc=utf-8 | AutoComplPopDisable
 
 " mapping
-
-" inoremap  <BS>
-
 nnoremap j gj
 nnoremap k gk
-" nmap gb :ls<CR>:buf 
-
-" sort css property (id:secondlife)
-nmap gso vi{:!sortcss<CR>
-vmap gso i{:!sortcss<CR>
-
+nnoremap <C-c>  :<C-u>close<CR>
+nnoremap <C-d>  :<C-u>buffer # \| bwipe #<CR>
+nmap <silent> eo :e %:h<CR>
 
 " encoding
 nmap <silent> eu :set fenc=utf-8<CR>
@@ -149,77 +97,24 @@ nmap <silent> ere :e ++enc=euc-jp %<CR>
 nmap <silent> ers :e ++enc=cp932 %<CR>
 nmap <silent> err :e %<CR>
 
+" indent whole buffer
+noremap <F8> gg=G``
 
-"for yanktmp.vim
-map <silent> sy :call YanktmpYank()<CR>
-map <silent> sp :call YanktmpPaste_p()<CR>
-map <silent> sP :call YanktmpPaste_P()<CR>
+" insert timestamp
+nmap <F9> :exe "normal! i" . strftime("%Y-%m-%d\T%H:%M:%S+09:00")<CR>
 
 " redraw map
 nmap <silent> sr :redraw!<CR>
 
-nmap <silent> eo :e %:h<CR>
-
-" nmap <silent> eg :e git:HEAD^:%<CR>
-nnoremap <silent> eg :<C-u>call <SID>git_prev_rev()<CR>
-
-function! s:git_prev_rev()
-	let path = expand('%')
-	let commit = "HEAD"
-
-	let l = matchlist(path, 'git:\([^:]\+\):\([^:]\+\)')
-	if len(l) > 0
-		let commit = l[1]
-		let path   = l[2]
-	endif
-
-	let output = system(printf("git log -n 2 --pretty=format:'%%h %%s' HEAD~100..%s -- %s",
-	\                          shellescape(commit),
-	\                          shellescape(path)))
-
-	if v:shell_error != 0
-		echoerr 'git log failed with the following reason:'
-		echoerr output
-		return
-	endif
-
-	let commits = split(output, "\n")
-	let prev    = commits[1]
-	let [commit_id, subject] = matchlist(prev, '^\(\S*\)\s\(.*\)$')[1:2]
-
-	let cursor = getpos(".")
-	silent edit `=printf('git:%s:%s', commit_id, path)`
-	call setpos('.', cursor)
-
-	echo subject
-endfunction
+" sort css property (id:secondlife)
+nmap gso vi{:!sortcss<CR>
+vmap gso i{:!sortcss<CR>
 
 " cmode
 cmap <ESC>h <Left>
 cmap <ESC>l <Right>
 
-
-"if has("mac")
-	map <silent> sY :call YankPB()<CR>
-	function! YankPB()
-		let tmp = tempname()
-		call writefile(getline(a:firstline, a:lastline), tmp, 'b')
-		silent exec ":!cat " . tmp . " | pbcopy"
-	endfunction
-"endif
-
-" execute script
-nmap ,e :call ShebangExecute()<CR>
-
-" indent whole buffer
-noremap <F8> gg=G``
-
-" xml close tag comp
-" autocmd FileType html,xhtml,xml :inoremap </ </<C-X><C-O>
-
-" insert timestamp
-nmap tw :exe "normal! i" . strftime("%Y-%m-%d\T%H:%M:%S+09:00")<CR>
-
+" good_width
 nnoremap <C-w><C-w> <C-w><C-w>:call <SID>good_width()<CR>
 nnoremap <C-w>h <C-w>h:call <SID>good_width()<CR>
 nnoremap <C-w>j <C-w>j:call <SID>good_width()<CR>
@@ -232,27 +127,21 @@ function! s:good_width()
 	endif
 endfunction
 
-let g:fuf_modesDisable = ['mrucmd']
-let g:fuf_file_exclude = '\v\~$|\.(o|exe|bak|swp|gif|jpg|png)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
-let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|\.howm$|\.(gif|jpg|png)$'
-let g:fuf_mrufile_maxItem = 500
-let g:fuf_enumeratingLimit = 20
-let g:fuf_keyPreview = '<C-]>'
-let g:fuf_previewHeight = 0
+" augroup
+augroup BinaryXXD
+	autocmd!
+	autocmd BufReadPre  *.bin let &binary =1
+	autocmd BufReadPost * if &binary | silent %!xxd -g 1
+	autocmd BufReadPost * set ft=xxd | endif
+	autocmd BufWritePre * if &binary | %!xxd -r | endif
+	autocmd BufWritePost * if &binary | silent %!xxd -g 1
+	autocmd BufWritePost * set nomod | endif
+augroup END
 
-nmap bg :FufBuffer<CR>
-nmap bG :FufFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<CR><CR>
-"nmap gb :FufFile<CR>
-nmap gb :FufFile **/<CR>
-nmap br :FufMruFile<CR>
-nmap bq :FufQuickfix<CR>
-nmap bl :FufLine<CR>
-nnoremap <silent> <C-]> :FufTag! <C-r>=expand('<cword>')<CR><CR> 
-
-nmap <unique> g/ :exec ':vimgrep /' . getreg('/') . '/j %\|cwin'<CR>
-nmap ga :silent exec ':Ack ' . substitute(getreg('/'), '\v\\\<(.*)\\\>', "\\1", '')<CR>
-
-
+augroup Indent
+	au!
+	au BufNewFile,BufRead *yuno/* set expandtab softtabstop=4 tabstop=4 shiftwidth=4
+augroup END
 
 augroup MyAutocmd
 	au!
@@ -274,37 +163,32 @@ augroup MyAutocmd
 				\ | endif
 augroup END
 
-
-" flex
-augroup Fcsh
-	au!
-"	autocmd BufWritePost *.{as,mxml} call FcshCall()
-augroup END
-
-function! FcshCall()
-	let ret = system('ruby -rdrb/drb -e "puts DRbObject.new_with_uri(''druby://localhost:8787'').call(ARGV[0])"  "'.expand("%:p").'"')
-	if matchstr(ret, 'Error') != ""
-		echo ret
-	endif
-endfunction
-
-
-function! ShebangExecute()
-	let m = matchlist(getline(1), '#!\(.*\)')
-	if(len(m) > 2)
-		execute '!'. m[1] . ' %'
-	else
-		execute '!' &ft ' %'
-	endif
-endfunction
-
-augroup Indent
-	au!
-	au BufNewFile,BufRead *yuno/* set expandtab softtabstop=4 tabstop=4 shiftwidth=4
-augroup END
+" autocomplepop
+let g:AutoComplPop_CompleteOption = '.,w,b,k'
+let g:AutoComplPop_Behavior = {
+			\   'java' : [
+			\     {
+			\       'command'  : "\<C-n>",
+			\       'pattern'  : '\k\k$',
+			\       'excluded' : '^$',
+			\       'repeat'   : 0,
+			\     },
+			\     {
+			\       'command'  : "\<C-x>\<C-u>",
+			\       'pattern'  : '\k\k$',
+			\       'excluded' : '^$',
+			\       'repeat'   : 0,
+			\     },
+			\     {
+			\       'command'  : "\<C-x>\<C-f>",
+			\       'pattern'  : (has('win32') || has('win64') ? '\f[/\\]\f*$' : '\f[/]\f*$'),
+			\       'excluded' : '[*/\\][/\\]\f*$\|[^[:print:]]\f*$',
+			\       'repeat'   : 1,
+			\     }
+			\   ]
+			\ }
 
 " {{{ Autocompletion using the TAB key
-
 " This function determines, wether we are on the start of the line text (then tab indents) or
 " if we want to try autocompletion
 function! InsertTabWrapper()
@@ -321,100 +205,26 @@ function! InsertTabWrapper()
 endfunction
 " Remap the tab key to select action with InsertTabWrapper
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-
 " }}} Autocompletion using the TAB key
 
-set iminsert=0 imsearch=0
+" fuf
+let g:fuf_modesDisable = ['mrucmd']
+let g:fuf_file_exclude = '\v\~$|\.(o|exe|bak|swp|gif|jpg|png)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|\.howm$|\.(gif|jpg|png)$'
+let g:fuf_mrufile_maxItem = 500
+let g:fuf_enumeratingLimit = 20
+let g:fuf_keyPreview = '<C-]>'
+let g:fuf_previewHeight = 0
 
-set nofoldenable
-set lazyredraw
-" inoremap <expr> <CR> pumvisible() ? "\<C-Y>\<CR>" : "\<CR>"
+nmap ff :FufFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<CR><CR>
+nmap fr :MRU<CR>
+nmap fl :FufLine<CR>
 
-let g:AutoComplPop_CompleteOption = '.,w,b,k'
-let g:AutoComplPop_Behavior = {
-      \   'java' : [
-      \     {
-      \       'command'  : "\<C-n>",
-      \       'pattern'  : '\k\k$',
-      \       'excluded' : '^$',
-      \       'repeat'   : 0,
-      \     },
-      \     {
-      \       'command'  : "\<C-x>\<C-u>",
-      \       'pattern'  : '\k\k$',
-      \       'excluded' : '^$',
-      \       'repeat'   : 0,
-      \     },
-      \     {
-      \       'command'  : "\<C-x>\<C-f>",
-      \       'pattern'  : (has('win32') || has('win64') ? '\f[/\\]\f*$' : '\f[/]\f*$'),
-      \       'excluded' : '[*/\\][/\\]\f*$\|[^[:print:]]\f*$',
-      \       'repeat'   : 1,
-      \     }
-      \   ]
-      \ }
+" minibufexpl
+:let g:miniBufExplMapWindowNavVim = 1
+:let g:miniBufExplMapWindowNavArrows = 1
+:let g:miniBufExplMapCTabSwitchBuffs = 1
 
-autocmd BufNewFile,BufRead *.cgi set filetype=perl
-
-autocmd BufNewFile,BufRead *.io set filetype=io
-autocmd BufNewFile,BufRead *.scala set filetype=scala
-autocmd BufNewFile,BufRead COMMIT_EDITMSG set filetype=git fenc=utf-8 | AutoComplPopDisable
-
-autocmd BufNewFile,BufRead */Hatena*/*.{html,tt} set ft=html | setlocal softtabstop=2 tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead */Hatena* setlocal expandtab
-
-nnoremap <C-c>  :<C-u>close<CR>
-nnoremap <C-d>  :<C-u>buffer # \| bwipe #<CR>
-
-
-function! Smartchr(fallback_literal, ...)
-	let args = reverse(copy(a:000))
-	call add(args, a:fallback_literal)
-	let args = map(args, 'type(v:val) == type("") ? [0, v:val] : v:val')
-
-	for i in range(len(args) - 1)
-		let [pattern1, literal1] = args[i]
-		let [pattern2, literal2] = args[i+1]
-
-		if pattern1 is 0
-			if search('\V' . escape(literal2, '\') . '\%#', 'bcn')
-				return repeat("\<BS>", len(literal2)) . literal1
-			endif
-		else
-			throw 'FIXME: pattern is not implemented yet: ' . string(args[i])
-		endif
-	endfor
-
-	return a:fallback_literal
-endfunction
-
-
-command! -bang -narg=0  HatenaStamp call append(line('.'), "*" . localtime() . "*") | execute "normal jo"
-
-
-iabbr slef self
-iabbr sefl self
-iabbr tihs this
-iabbr thsi this
-iabbr crete create
-iabbr funciton function
-
-function! EditRRGGBBbyHSV(hsv, delta)
-	let a = 123
-	let b = "456"
-	" do something ...
-endfunction
-
-
-augroup BinaryXXD
-	autocmd!
-	autocmd BufReadPre  *.bin let &binary =1
-	autocmd BufReadPost * if &binary | silent %!xxd -g 1
-	autocmd BufReadPost * set ft=xxd | endif
-	autocmd BufWritePre * if &binary | %!xxd -r | endif
-	autocmd BufWritePost * if &binary | silent %!xxd -g 1
-	autocmd BufWritePost * set nomod | endif
-augroup END
-
-autocmd BufWritePost */debuglet.js silent! execute '!ruby /Users/cho45/bin/debuglet.rb %'
-autocmd BufNewFile */debuglet.js silent! execute 'r!ruby /Users/cho45/bin/debuglet.rb'
+" pathogen
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
