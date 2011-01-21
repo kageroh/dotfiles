@@ -1,5 +1,5 @@
 if has('gui_macvim')
-	colorscheme darkblue
+	colorscheme ir_black
 	set antialias
 	set guifont=Menlo:h13
 	set guioptions-=T
