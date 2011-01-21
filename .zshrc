@@ -8,6 +8,7 @@ export RIDGE_ENV=test
 export FLEX_HOME=$HOME/sdk/flex4sdk
 
 PATHS=(
+	$HOME/.vim/bin
 	$HOME/.npm/bin
 	$HOME/bin
 	$HOME/project/commands/bin
