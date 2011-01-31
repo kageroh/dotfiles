@@ -8,14 +8,14 @@ highlight PmenuSel ctermbg=3 guibg=#d4b979
 highlight PmenuSbar ctermbg=0 guibg=#333333
 
 if &term =~ "xterm-256color"
-	colorscheme lucius
+	colorscheme wombat
 	highlight Pmenu ctermbg=8
 	highlight PmenuSel ctermbg=12
 	highlight PmenuSbar ctermbg=0
 endif
 
 if has('gui_macvim')
-	colorscheme lucius
+	colorscheme wombat
 	set antialias
 	set guifont=Menlo:h13
 	set guioptions-=T
@@ -161,6 +161,12 @@ augroup MyAutocmd
 				\   if &modifiable && !search('[^\x00-\x7F]', 'cnw')
 				\ |   setlocal fileencoding=
 				\ | endif
+augroup END
+
+augroup MyXML
+	autocmd!
+	autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
+	autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 augroup END
 
 " autocomplepop
