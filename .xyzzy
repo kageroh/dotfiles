@@ -125,6 +125,9 @@
 (autoload 'ini-mode "ini-mode" t)
 (pushnew '("\\.ini$" . ini-mode) *auto-mode-alist* :test 'equal)
 
+; java
+(pushnew '("\\.jad$" . java-mode) *auto-mode-alist* :test 'equal)
+
 ; javascript
 (require "javascript-mode")
 (export 'ed::javascript-mode "ed")
