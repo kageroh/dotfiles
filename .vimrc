@@ -8,14 +8,14 @@ highlight PmenuSel ctermbg=3 guibg=#d4b979
 highlight PmenuSbar ctermbg=0 guibg=#333333
 
 if &term =~ "xterm-256color"
-	colorscheme wombat
+	colorscheme lucius
 	highlight Pmenu ctermbg=8
 	highlight PmenuSel ctermbg=12
 	highlight PmenuSbar ctermbg=0
 endif
 
 if has('gui_macvim')
-	colorscheme wombat
+	colorscheme lucius
 	set antialias
 	set guifont=Menlo:h13
 	set guioptions-=T
