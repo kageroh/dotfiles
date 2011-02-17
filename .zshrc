@@ -156,6 +156,9 @@ HISTSIZE=9999999
 HISTFILE=~/.zsh_history
 SAVEHIST=9999999
 
+autoload zmv
+alias zmv='noglob zmv'
+
 if [ `uname` = "FreeBSD" -o `uname` = "Darwin" ]
 then
 	alias ls='ls -FG'
