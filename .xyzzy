@@ -157,6 +157,7 @@
 
 ; xml
 (require "xml/xslt")
+(pushnew '("\\.rss$" . xml-mode) *auto-mode-alist* :test 'equal)
 (pushnew '("\\.xaml$" . xml-mode) *auto-mode-alist* :test 'equal)
 (pushnew '("\\.xul$" . xml-mode) *auto-mode-alist* :test 'equal)
 
