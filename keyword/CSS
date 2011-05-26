@@ -291,6 +291,7 @@ text-overflow
 text-shadow
 transform
 transform-origin
+transition
 visibility
 word-wrap
 z-index
@@ -364,15 +365,18 @@ vertical
 -moz-box-sizing
 -moz-transform
 -moz-transform-origin
+-moz-transition
 -moz-user-select
 -o-text-overflow
 -o-transform
 -o-transform-origin
+-o-transition
 -webkit-border-radius
 -webkit-box-sizing
 -webkit-box-shadow
 -webkit-transform
 -webkit-transform-origin
+-webkit-transition
 behavior
 overflow-x
 overflow-y
