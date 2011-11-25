@@ -1,24 +1,8 @@
-# vim:set ft=zsh:
-# ~/.zshrc はサーバなどに転送して単体で使えるように
-# 自分管理のマシンなどは ~/.zsh/mine.zshrc に追加の設定をする
-
 stty intr 
-
-export RIDGE_ENV=test
-export FLEX_HOME=$HOME/sdk/flex4sdk
 
 PATHS=(
 	$HOME/.vim/bin
 	$HOME/.npm/bin
-	$HOME/bin
-	$HOME/project/commands/bin
-	$HOME/sdk/play
-	$HOME/sdk/android/tools
-	$HOME/sdk/flex/bin
-	/usr/local/ruby1.9/bin
-	/usr/local/scala/bin
-	/usr/local/vim7/bin
-	/usr/local/screen/bin
 	/opt/local/sbin
 	/opt/local/bin
 	/usr/local/bin
@@ -35,20 +19,13 @@ export MANPATH=${(j.:.)MANPATHS}
 
 export NODE_PATH=$HOME/.npm/libraries:$NODE_PATH
 
-unset PS1
-
-export MYSQL_PS1="(\u@\h) [\d]> "
-export PAGER="less --quit-if-one-screen --RAW-CONTROL-CHARS"
-export LESS='-X -i -P ?f%f:(stdin).  ?lb%lb?L/%L..  [?eEOF:?pb%pb\%..]'
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
-
-export PERL5LIB=lib:$HOME/lib/perl
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-export NYTPROF=sigexit=int,hup:trace=2:start=no
+
+unset PS1
 
 bindkey -e
-#bindkey -D vicmd
 bindkey -r '^X^V'
 
 help! () { zle -M "E478: Don't panic!" }
@@ -62,17 +39,8 @@ setopt print_eight_bit
 # 補完キー連打で候補移動
 setopt auto_menu
 
-# ディレクトリ名だけで cd
-#setopt auto_cd
-
-# コマンド名スペルチェック
-setopt correct
-
 # 
 setopt auto_name_dirs
-
-# ヒストリは追記
-# setopt append_history
 
 # シェルのプロセスごとに履歴を共有
 setopt share_history
@@ -97,7 +65,6 @@ setopt prompt_subst
 
 # 同じディレクトリなら pushd しない
 setopt pushd_ignore_dups
-
 setopt auto_pushd
 
 # 高機能な glob
@@ -113,11 +80,7 @@ setopt always_last_prompt
 setopt cdable_vars
 setopt sh_word_split
 setopt ignore_eof
-
 setopt magic_equal_subst
-
-# 終了コード表示。冗長
-#setopt print_exit_value
 
 # 補完
 autoload -U compinit
@@ -173,7 +136,6 @@ alias hi='history'
 alias ..='cd ..'
 
 alias sass='sass --load-path $HOME/src/sass/'
-alias perl='perl5.10.0'
 alias wget='noglob wget --no-check-certificate'
 
 alias :q=exit
@@ -196,26 +158,11 @@ abbreviations=(
 	"L"    "| \$PAGER"
 	"G"    "| grep"
 
-	"H"     "$HOME/project/Hatena-"
-
-	"HE"    "lib/**/Engine/"
-	"HM"    "lib/**/MoCo/"
-	"HA"    "lib/**/App/"
-	"HC"    "lib/**/Config.pm"
-
 	"HEAD^"     "HEAD\\^"
 	"HEAD^^"    "HEAD\\^\\^"
 	"HEAD^^^"   "HEAD\\^\\^\\^"
 	"HEAD^^^^"  "HEAD\\^\\^\\^\\^\\^"
 	"HEAD^^^^^" "HEAD\\^\\^\\^\\^\\^"
-
-	# typo
-	"lkm"   "lm"
-	"it"    "git"
-	"gitp"  "git"
-	"ush"   "push"
-
-	# "mysql" "mysql -unobody -pnobody -h"
 )
 
 magic-abbrev-expand () {
