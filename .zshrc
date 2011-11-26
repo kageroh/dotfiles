@@ -134,6 +134,7 @@ alias lm='ls -altrh'
 alias ps='ps aux'
 alias hi='history'
 alias ..='cd ..'
+alias rm='gmv -f --backup=numbered --target-directory ~/.Trash'
 
 alias vim='/usr/local/bin/vim'
 alias sass='sass --load-path $HOME/src/sass/'
