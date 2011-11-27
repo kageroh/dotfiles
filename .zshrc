@@ -27,6 +27,8 @@ unset PS1
 
 bindkey -e
 bindkey -r '^X^V'
+bindkey ";5C" forward-word
+bindkey ";5D" backward-word
 
 help! () { zle -M "E478: Don't panic!" }
 zle -N help!
