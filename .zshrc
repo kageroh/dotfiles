@@ -138,7 +138,8 @@ alias hi='history'
 alias ..='cd ..'
 alias rm='gmv -f --backup=numbered --target-directory ~/.Trash'
 
-alias vim='/usr/local/bin/vim'
+alias vi='/usr/local/bin/vim'
+alias min='java -jar ~/app/yuicompressor-2.4.7.jar'
 alias sass='sass --load-path $HOME/src/sass/'
 alias wget='noglob wget --no-check-certificate'
 
