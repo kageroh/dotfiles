@@ -143,6 +143,8 @@ alias vim='vi'
 alias min='java -jar ~/app/yuicompressor-2.4.7.jar -o min.js'
 alias sass='sass --load-path $HOME/src/sass/'
 alias wget='noglob wget --no-check-certificate'
+alias javac="javac -J-Dfile.encoding=UTF8"
+alias java="java -Dfile.encoding=UTF8"
 
 alias :q=exit
 alias sudo='sudo env PATH=$PATH'
