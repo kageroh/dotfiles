@@ -6,6 +6,7 @@ PATHS=(
 	/opt/local/sbin
 	/opt/local/bin
 	/usr/local/bin
+	/usr/local/sbin
 	$PATH
 )
 export PATH=${(j.:.)PATHS}
