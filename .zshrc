@@ -125,6 +125,8 @@ SAVEHIST=9999999
 autoload zmv
 alias zmv='noglob zmv'
 
+calc() { echo $(( $* )) }
+
 if [ `uname` = "FreeBSD" -o `uname` = "Darwin" ]
 then
 	alias ls='ls -FG'
